@@ -154,21 +154,20 @@ export const personal = {
 export const about = {
   paragraphs: {
     tr: [
-      'Yazılım geliştiricisiyim. İstanbul Şehir Üniversitesi Bilgisayar Mühendisliği mezunuyum; 2019–2025 yılları arasında Mayadem\'de ağırlıklı olarak C# ve Unity ile iOS, Android ve ChromeOS için milyonlarca kullanıcıya ulaşan uygulamalar geliştirdim.',
-      'Bir ürünün geliştirmeden yayına ve yayından sonrasına kadar her aşamasında sorumluluk almayı seviyorum. REST API ve üçüncü taraf servis entegrasyonları, sürüm yönetimi, hata ve çökme analizi ile performans optimizasyonu en çok deneyim kazandığım alanlar. Hassas kullanıcı kitlelerine yönelik ürünlerde çalışmak, gizliliği ve platform kurallarına (COPPA gibi) uyumu işin en başından düşünmeyi alışkanlık haline getirdi.',
-      'Agile/Scrum ile çalışan, farklı disiplinlerden oluşan ekiplerde yer aldım ve stajyer geliştiricilere mentorluk yaptım. Yeni teknolojiler öğrenmekten keyif alıyorum; şu sıralar Swift, Flutter, React Native ve yapay zekâ entegrasyonları üzerine çalışıyorum. Temiz ve sürdürülebilir kod yazmaya, kullanıcıya gerçekten değer katan ürünler geliştirmeye önem veriyorum.',
+      'İstanbul Şehir Üniversitesi Bilgisayar Mühendisliği mezunu bir yazılım geliştiricisiyim. 2019–2025 yılları arasında Mayadem\'de C# ve Unity ile iOS, Android ve ChromeOS platformları için milyonlarca kullanıcıya ulaşan mobil uygulamalar geliştirdim.',
+      'Ürün geliştirme sürecinin tüm aşamalarında; geliştirme, yayın ve yayın sonrası bakımda sorumluluk aldım. Servis entegrasyonları, sürüm yönetimi ve performans iyileştirmeleri başlıca deneyim alanlarım arasında yer alıyor.',
+      'Agile/Scrum yöntemiyle çalışan, farklı disiplinlerden oluşan ekiplerde görev aldım ve stajyer geliştiricilere mentorluk yaptım. Yeni teknolojileri yakından takip ediyorum; şu anda Swift, Flutter, React Native ve yapay zekâ entegrasyonları üzerine çalışıyorum. Temiz, sürdürülebilir ve kullanıcıya gerçek değer katan yazılımlar geliştirmeyi temel ilke olarak benimsiyorum.',
     ],
     en: [
-      'I am a software developer with a degree in Computer Engineering from Istanbul Şehir University. From 2019 to 2025 I worked at Mayadem, mainly building apps with C# and Unity for iOS, Android and ChromeOS that reached millions of users.',
-      'I like taking ownership of a product at every stage, from development to release and beyond. REST API and third-party service integrations, release management, bug and crash analysis, and performance optimization are the areas where I have the most experience. Working on products for a sensitive audience made it a habit to think about privacy and platform compliance (such as COPPA) from the very start.',
-      'I have worked in cross-functional Agile/Scrum teams and mentored intern developers. I enjoy learning new technologies and am currently working with Swift, Flutter, React Native and AI integrations. I care about writing clean, maintainable code and building products that bring real value to their users.',
+      'I am a software developer with a degree in Computer Engineering from Istanbul Şehir University. From 2019 to 2025 I worked at Mayadem, developing mobile apps with C# and Unity for iOS, Android and ChromeOS that reached millions of users.',
+      'I have taken ownership across the full product lifecycle, from development through release and ongoing maintenance. Service integrations, release management and performance optimization are among my main areas of expertise.',
+      'I have worked in cross-functional Agile/Scrum teams and mentored intern developers. I keep a close eye on new technologies and am currently working with Swift, Flutter, React Native and AI integrations. Building clean, maintainable software that delivers real value to its users is a core principle of my work.',
     ],
   } as L<string[]>,
   highlights: [
     { value: '6+', label: { tr: 'Yıl deneyim', en: 'Years of experience' } },
     { value: '15M+', label: { tr: 'Toplam indirme', en: 'Total downloads' } },
     { value: '39+', label: { tr: 'Üzerinde çalıştığım uygulama', en: 'Apps worked on' } },
-    { value: { tr: '%99,2', en: '99.2%' }, label: { tr: 'Çökmesiz oturum', en: 'Crash-free sessions' } },
   ] as Metric[],
   languages: {
     tr: 'Türkçe (ana dil) · İngilizce (B2)',
