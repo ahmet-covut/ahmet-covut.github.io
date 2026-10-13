@@ -62,13 +62,16 @@ export const ui = {
     'experience.showLess': 'Daha az göster',
 
     'freelance.title': 'Freelance çalışma',
-    'freelance.intro': 'Mayadem\'de 6 yıl boyunca milyonlarca kez indirilen çocuk uygulamaları geliştirdim. Şimdi aynı deneyimle eğitici uygulama, çocuk uygulaması ve Unity ile mobil oyun projelerinde freelance çalışıyorum.',
+    'freelance.intro': 'Mayadem\'de 6 yıl boyunca milyonlarca kez indirilen çocuk uygulamaları geliştirdim. Şimdi bu deneyimle mobil uygulama, web sitesi ve Unity ile oyun projelerinde freelance çalışıyorum.',
     'freelance.proof': 'Üzerinde çalıştığım uygulamalar',
 
     'services.title': 'Neler yapabilirim?',
-    'services.subtitle': 'Belirtilen fiyatlar başlangıç fiyatlarıdır; kesin fiyatı projeyi konuştuktan sonra paylaşıyorum.',
+    'services.subtitle': 'Fiyatlar projenin kapsamına göre değişen aralıklardır; kesin fiyatı projeyi konuştuktan sonra yazılı olarak paylaşıyorum.',
+    'services.tabs': 'Hizmet türü',
     'services.duration': 'Süre',
     'services.cta': 'Teklif iste',
+    'services.note': 'Fiyatlara grafik, ses ve arayüz tasarımı dahil değildir; hazır tasarımınızla çalışırım ya da tasarım için ayrı teklif veririm. App Store ve Google Play hesap ücretleri size aittir.',
+    'services.extras': 'Ek hizmetler',
 
     'process.title': 'Nasıl çalışıyoruz?',
 
@@ -154,13 +157,16 @@ export const ui = {
     'experience.showLess': 'Show less',
 
     'freelance.title': 'Freelance work',
-    'freelance.intro': 'For 6 years at Mayadem I built kids\' apps that were downloaded millions of times. Now I bring that experience to freelance projects: educational apps, apps for kids and mobile games built with Unity.',
+    'freelance.intro': 'For 6 years at Mayadem I built kids\' apps that were downloaded millions of times. Now I bring that experience to freelance projects: mobile apps, websites and games built with Unity.',
     'freelance.proof': 'Apps I have worked on',
 
     'services.title': 'What I can do for you',
-    'services.subtitle': 'These are starting prices; I share an exact quote once we have discussed the project.',
+    'services.subtitle': 'Prices are ranges that depend on the project scope; I send an exact quote in writing once we have discussed the project.',
+    'services.tabs': 'Service type',
     'services.duration': 'Duration',
     'services.cta': 'Request a quote',
+    'services.note': 'Prices do not include graphics, sound or UI design; I can work with your existing designs or quote the design separately. App Store and Google Play account fees are paid by you.',
+    'services.extras': 'Additional services',
 
     'process.title': 'How we work together',
 

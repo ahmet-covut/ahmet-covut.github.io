@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import SectionHeader from './SectionHeader.astro';
-import { services, type Lang } from '../data/profile';
+import { extraServices, serviceCategories, type Lang } from '../data/profile';
 import { pick, useTranslations } from '../i18n/ui';
 
 interface Props {
@@ -14,24 +14,98 @@ const t = useTranslations(lang);
 
 <section id="services" class="section">
   <SectionHeader title={t('services.title')} subtitle={t('services.subtitle')} />
-  <div class="grid gap-6 md:grid-cols-2">
-    {
-      services.map((service) => (
-        <div class="card reveal flex flex-col hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg dark:hover:border-brand-700">
-          <div class="flex items-start justify-between gap-4">
-            <span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
-              <Icon name={service.icon} class="h-6 w-6" />
-            </span>
-            <div class="text-right">
-              <p class="font-bold text-slate-900 dark:text-white">{pick(service.priceFrom, lang)}</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400">
-                {t('services.duration')}: {pick(service.duration, lang)}
-              </p>
+
+  <div class="reveal" data-tabs>
+    <div
+      role="tablist"
+      aria-label={t('services.tabs')}
+      hidden
+      class="mb-8 flex w-full gap-1 rounded-2xl bg-slate-100 p-1 sm:inline-flex sm:w-auto dark:bg-slate-800/70"
+    >
+      {
+        serviceCategories.map((category, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${category.id}`}
+            aria-controls={`panel-${category.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            class="flex grow items-center justify-center gap-2 rounded-xl px-3 py-2.5 whitespace-nowrap text-sm font-semibold text-slate-600 transition hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-500 aria-selected:bg-white aria-selected:text-brand-600 aria-selected:shadow-sm sm:px-5 dark:text-slate-300 dark:hover:text-white dark:aria-selected:bg-slate-900 dark:aria-selected:text-brand-400"
+          >
+            <Icon name={category.icon} class="hidden h-4 w-4 sm:block" />
+            {pick(category.title, lang)}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col gap-12">
+      {
+        serviceCategories.map((category) => (
+          <div id={`panel-${category.id}`} role="tabpanel" aria-labelledby={`tab-${category.id}`}>
+            <div class="mb-3 flex items-center gap-4" data-tab-heading>
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+                <Icon name={category.icon} class="h-6 w-6" />
+              </span>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{pick(category.title, lang)}</h3>
+            </div>
+            <p class="max-w-2xl text-slate-600 dark:text-slate-300">{pick(category.description, lang)}</p>
+
+            <div class="mt-6 grid gap-6 lg:grid-cols-3">
+              {category.tiers.map((tier) => (
+                <div class="card flex flex-col hover:border-brand-300 dark:hover:border-brand-700">
+                  <h4 class="text-lg font-bold text-slate-900 dark:text-white">{pick(tier.name, lang)}</h4>
+                  <p class="mt-3 text-2xl font-extrabold tracking-tight text-brand-600 dark:text-brand-400">
+                    {pick(tier.price, lang)}
+                  </p>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    {t('services.duration')}: {pick(tier.duration, lang)}
+                  </p>
+                  <ul class="mt-5 flex-1 space-y-2 border-t border-slate-200 pt-5 dark:border-slate-800">
+                    {pick(tier.features, lang).map((f) => (
+                      <li class="flex gap-2 text-sm text-slate-600 dark:text-slate-300">
+                        <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    data-service={`${pick(category.title, lang)} – ${pick(tier.name, lang)}`}
+                    class="btn-secondary mt-6 w-full"
+                  >
+                    {t('services.cta')}
+                    <Icon name="arrowRight" class="h-4 w-4" />
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
-          <h3 class="mt-5 text-xl font-bold text-slate-900 dark:text-white">{pick(service.title, lang)}</h3>
-          <p class="mt-2 text-slate-600 dark:text-slate-300">{pick(service.description, lang)}</p>
-          <ul class="mt-5 flex-1 space-y-2">
+        ))
+      }
+    </div>
+
+    <p class="mt-8 max-w-3xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">{t('services.note')}</p>
+  </div>
+
+  <h3 class="reveal mt-16 text-2xl font-bold text-slate-900 dark:text-white">{t('services.extras')}</h3>
+  <div class="mt-6 grid gap-6 md:grid-cols-3">
+    {
+      extraServices.map((service) => (
+        <div class="card reveal flex flex-col hover:border-brand-300 dark:hover:border-brand-700">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+              <Icon name={service.icon} class="h-5 w-5" />
+            </span>
+            <h4 class="font-bold text-slate-900 dark:text-white">{pick(service.title, lang)}</h4>
+          </div>
+          <p class="mt-4 font-bold text-slate-900 dark:text-white">{pick(service.priceFrom, lang)}</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            {t('services.duration')}: {pick(service.duration, lang)}
+          </p>
+          <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">{pick(service.description, lang)}</p>
+          <ul class="mt-4 flex-1 space-y-2">
             {pick(service.features, lang).map((f) => (
               <li class="flex gap-2 text-sm text-slate-600 dark:text-slate-300">
                 <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
@@ -42,7 +116,7 @@ const t = useTranslations(lang);
           <a
             href="#contact"
             data-service={pick(service.title, lang)}
-            class="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-brand-600 transition-all hover:gap-2.5 dark:text-brand-400"
+            class="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-brand-600 transition-all hover:gap-2.5 dark:text-brand-400"
           >
             {t('services.cta')}
             <Icon name="arrowRight" class="h-4 w-4" />
@@ -52,3 +126,35 @@ const t = useTranslations(lang);
     }
   </div>
 </section>
+
+<script>
+  // JavaScript kapalıysa sekmeler gizli kalır ve tüm paketler alt alta görünür
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')!)!);
+
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        const active = i === index;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        panels[i].hidden = !active;
+      });
+      if (focus) tabs[index].focus();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i));
+      tab.addEventListener('keydown', (event) => {
+        const targets: Record<string, number> = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+        if (!(event.key in targets)) return;
+        event.preventDefault();
+        select((targets[event.key] + tabs.length) % tabs.length, true);
+      });
+    });
+
+    root.querySelector<HTMLElement>('[role="tablist"]')!.hidden = false;
+    root.querySelectorAll<HTMLElement>('[data-tab-heading]').forEach((el) => (el.hidden = true));
+    select(0);
+  });
+</script>

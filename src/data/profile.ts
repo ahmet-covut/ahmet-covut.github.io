@@ -52,8 +52,23 @@ export interface ExperienceItem {
   tech?: string[];
 }
 
+export interface PricingTier {
+  name: L;
+  price: L;
+  duration: L;
+  features: L<string[]>;
+}
+
+export interface ServiceCategory {
+  id: 'mobile' | 'web' | 'game';
+  icon: 'smartphone' | 'globe' | 'gamepad';
+  title: L;
+  description: L;
+  tiers: PricingTier[];
+}
+
 export interface Service {
-  icon: 'rocket' | 'plus' | 'store' | 'wrench';
+  icon: 'plus' | 'store' | 'wrench';
   title: L;
   description: L;
   priceFrom: L;
@@ -477,21 +492,124 @@ export const experience: ExperienceItem[] = [
 // TL fiyatlarını enflasyona göre 6 ayda bir gözden geçir.
 // ---------------------------------------------------------------------------
 
-export const services: Service[] = [
+export const serviceCategories: ServiceCategory[] = [
   {
-    icon: 'rocket',
-    title: { tr: 'Unity ile Mobil Uygulama ve Oyun', en: 'Mobile Apps & Games with Unity' },
+    id: 'mobile',
+    icon: 'smartphone',
+    title: { tr: 'Mobil Uygulama', en: 'Mobile Apps' },
     description: {
-      tr: 'Eğitici bir uygulama, çocuk uygulaması ya da mobil oyun fikriniz varsa, Unity ile iOS, Android ve ChromeOS için geliştirip mağazaya çıkarırım.',
-      en: 'If you have an idea for an educational app, a kids\' app or a mobile game, I can build it in Unity for iOS, Android and ChromeOS and get it into the stores.',
+      tr: 'Unity ile tek kod tabanından iOS, Android ve ChromeOS uygulamaları; mağaza yayını dahil.',
+      en: 'iOS, Android and ChromeOS apps from a single Unity codebase, store release included.',
     },
-    priceFrom: { tr: '120.000 TL\'den başlayan', en: 'From $4,000' },
-    duration: { tr: '4-10 hafta', en: '4-10 weeks' },
-    features: {
-      tr: ['Tek kod, üç platform', 'Analitik ve çökme takibi', 'Çocuk uygulamalarında COPPA uyumu', 'Mağaza yayını dahil'],
-      en: ['One codebase, three platforms', 'Analytics and crash monitoring', 'COPPA compliance for kids\' apps', 'Store release included'],
-    },
+    tiers: [
+      {
+        name: { tr: 'Basit', en: 'Basic' },
+        price: { tr: '60.000 – 120.000 TL', en: '$3,000 – $5,500' },
+        duration: { tr: '4–6 hafta', en: '4–6 weeks' },
+        features: {
+          tr: ['5–8 ekran', 'Metin, görsel ve video içerik', 'Analitik ve çökme takibi', 'App Store ve Google Play yayını'],
+          en: ['5–8 screens', 'Text, image and video content', 'Analytics and crash monitoring', 'App Store and Google Play release'],
+        },
+      },
+      {
+        name: { tr: 'Orta', en: 'Standard' },
+        price: { tr: '120.000 – 220.000 TL', en: '$5,500 – $10,000' },
+        duration: { tr: '6–10 hafta', en: '6–10 weeks' },
+        features: {
+          tr: ['Basit paketteki her şey', 'Üyelik ve Google / Apple ile giriş', 'REST API bağlantısı', 'Bildirimler', 'Abonelik ve uygulama içi satın alma'],
+          en: ['Everything in Basic', 'Accounts and Google / Apple sign-in', 'REST API connection', 'Push notifications', 'Subscriptions and in-app purchases'],
+        },
+      },
+      {
+        name: { tr: 'Kapsamlı', en: 'Advanced' },
+        price: { tr: '220.000 – 450.000 TL', en: '$10,000 – $20,000' },
+        duration: { tr: '10–16 hafta', en: '10–16 weeks' },
+        features: {
+          tr: ['Orta paketteki her şey', 'ChromeOS desteği', 'Okul ve kurum girişi (SSO)', 'Ebeveyn veya yönetim paneli', 'Çevrimdışı içerik', 'Çocuk uygulamalarında COPPA uyumu'],
+          en: ['Everything in Standard', 'ChromeOS support', 'School and organization sign-in (SSO)', 'Parent or admin dashboard', 'Offline content', 'COPPA compliance for kids\' apps'],
+        },
+      },
+    ],
   },
+  {
+    id: 'web',
+    icon: 'globe',
+    title: { tr: 'Web Sitesi', en: 'Websites' },
+    description: {
+      tr: 'Hızlı açılan, telefonda düzgün görünen ve Google\'da bulunabilen siteler. Bu site de örneklerden biri.',
+      en: 'Fast sites that look right on phones and can be found on Google. This site is one example.',
+    },
+    tiers: [
+      {
+        name: { tr: 'Tanıtım sitesi', en: 'Landing site' },
+        price: { tr: '12.000 – 25.000 TL', en: '$600 – $1,400' },
+        duration: { tr: '1–2 hafta', en: '1–2 weeks' },
+        features: {
+          tr: ['1–5 sayfa', 'Türkçe ve İngilizce', 'İletişim formu', 'Temel SEO', 'Ücretsiz barındırma kurulumu'],
+          en: ['1–5 pages', 'Two languages', 'Contact form', 'Basic SEO', 'Free hosting setup'],
+        },
+      },
+      {
+        name: { tr: 'Kurumsal site', en: 'Business site' },
+        price: { tr: '25.000 – 60.000 TL', en: '$1,400 – $3,000' },
+        duration: { tr: '2–5 hafta', en: '2–5 weeks' },
+        features: {
+          tr: ['10+ sayfa', 'Blog veya içerik yönetimi', 'Çoklu dil desteği', 'Analitik'],
+          en: ['10+ pages', 'Blog or content management', 'Multi-language support', 'Analytics'],
+        },
+      },
+      {
+        name: { tr: 'Web uygulaması', en: 'Web app' },
+        price: { tr: '70.000 – 180.000 TL', en: '$3,500 – $9,000' },
+        duration: { tr: '5–12 hafta', en: '5–12 weeks' },
+        features: {
+          tr: ['Üyelik ve giriş', 'Kullanıcı paneli', 'Veritabanı (Supabase)', 'Dosya yükleme'],
+          en: ['Accounts and sign-in', 'User dashboard', 'Database (Supabase)', 'File uploads'],
+        },
+      },
+    ],
+  },
+  {
+    id: 'game',
+    icon: 'gamepad',
+    title: { tr: 'Oyun', en: 'Games' },
+    description: {
+      tr: 'Unity ile iOS ve Android oyunları. Eğitici ve çocuklara yönelik oyunlarda 6 yıllık deneyim.',
+      en: 'iOS and Android games built with Unity, backed by 6 years of experience in educational and kids\' games.',
+    },
+    tiers: [
+      {
+        name: { tr: 'Mini oyun', en: 'Casual game' },
+        price: { tr: '40.000 – 90.000 TL', en: '$2,000 – $4,000' },
+        duration: { tr: '3–6 hafta', en: '3–6 weeks' },
+        features: {
+          tr: ['Tek oyun mekaniği', '10–20 seviye', 'Analitik', 'Mağaza yayını'],
+          en: ['One core mechanic', '10–20 levels', 'Analytics', 'Store release'],
+        },
+      },
+      {
+        name: { tr: 'Eğitici / çocuk oyunu', en: 'Educational / kids\' game' },
+        price: { tr: '90.000 – 220.000 TL', en: '$4,500 – $10,000' },
+        duration: { tr: '6–12 hafta', en: '6–12 weeks' },
+        features: {
+          tr: ['Birden fazla mini oyun', 'İlerleme kaydı', 'Ses ve animasyon entegrasyonu', 'COPPA uyumu'],
+          en: ['Multiple mini-games', 'Progress saving', 'Sound and animation integration', 'COPPA compliance'],
+        },
+      },
+      {
+        name: { tr: 'Kapsamlı oyun', en: 'Full game' },
+        price: { tr: '220.000 – 450.000 TL', en: '$10,000 – $22,000' },
+        duration: { tr: '3–6 ay', en: '3–6 months' },
+        features: {
+          tr: ['Çok sayıda seviye', 'Abonelik ve uygulama içi satın alma', 'Ebeveyn paneli', 'Yeni içerik eklenebilen yapı'],
+          en: ['Many levels', 'Subscriptions and in-app purchases', 'Parent dashboard', 'Built for adding new content'],
+        },
+      },
+    ],
+  },
+];
+
+export const extraServices: Service[] = [
   {
     icon: 'plus',
     title: { tr: 'Entegrasyon ve Yeni Özellik', en: 'Integrations & New Features' },
@@ -499,7 +617,7 @@ export const services: Service[] = [
       tr: 'Elinizde çalışan bir Unity uygulaması varsa abonelik, giriş, bildirim, analitik ya da API bağlantısı ekleyebilirim.',
       en: 'If you already have a working Unity app, I can add subscriptions, sign-in, push notifications, analytics or API connections.',
     },
-    priceFrom: { tr: 'Saatlik 1.500 TL', en: '$45 / hour' },
+    priceFrom: { tr: 'Saatlik 1.250 TL', en: '$45 / hour' },
     duration: { tr: 'İşe göre değişir', en: 'Depends on the work' },
     features: {
       tr: ['Unity IAP ile abonelik ve satın alma', 'Google, Apple, Facebook, ClassLink, Clever ile giriş', 'Firebase, AppsFlyer, Netmera', 'REST API bağlantısı'],
@@ -513,8 +631,8 @@ export const services: Service[] = [
       tr: 'Uygulamanız hazır ama mağazaya çıkaramıyorsanız ya da sürekli red alıyorsanız, App Store ve Google Play sürecini sizin için yürütürüm.',
       en: 'If your app is ready but you cannot get it into the stores, or it keeps getting rejected, I can handle the App Store and Google Play process for you.',
     },
-    priceFrom: { tr: '15.000 TL\'den başlayan', en: 'From $450' },
-    duration: { tr: '3-7 gün', en: '3-7 days' },
+    priceFrom: { tr: '10.000 TL\'den başlayan', en: 'From $450' },
+    duration: { tr: '3–7 gün', en: '3–7 days' },
     features: {
       tr: ['Hesap, sertifika ve imzalama kurulumu', 'TestFlight ve kapalı test', 'Çocuk kategorisi kuralları', 'Red gerekçesinin çözümü'],
       en: ['Account, certificate and signing setup', 'TestFlight and closed testing', 'Kids category rules', 'Fixing rejection reasons'],
@@ -527,7 +645,7 @@ export const services: Service[] = [
       tr: 'Canlıdaki uygulamanız çöküyor, yavaşlıyor ya da yeni iOS ve Android sürümlerinde sorun çıkarıyorsa aylık olarak ilgilenirim.',
       en: 'If your live app crashes, slows down or breaks on new iOS and Android versions, I can look after it every month.',
     },
-    priceFrom: { tr: 'Aylık 15.000 TL', en: '$500 / month' },
+    priceFrom: { tr: 'Aylık 10.000 TL', en: '$500 / month' },
     duration: { tr: 'Aylık', en: 'Monthly' },
     features: {
       tr: ['Ayda 10 saate kadar çalışma (fazlası saatlik ücretle)', 'Çökme analizi ve hotfix', 'Bellek ve performans iyileştirme', 'SDK ve Unity sürüm güncellemeleri'],
@@ -558,15 +676,15 @@ export const workProcess: ProcessStep[] = [
   {
     title: { tr: 'Geliştirme', en: 'Development' },
     description: {
-      tr: 'Her hafta telefonunuza kurup deneyebileceğiniz bir test sürümü gönderirim.',
-      en: 'Every week I send you a test build you can install on your phone and try.',
+      tr: 'Her hafta deneyebileceğiniz bir test sürümü ya da önizleme bağlantısı gönderirim.',
+      en: 'Every week I send you a test build or a preview link you can try.',
     },
   },
   {
     title: { tr: 'Yayın ve sonrası', en: 'Release and after' },
     description: {
-      tr: 'Uygulamayı kendi mağaza hesabınızdan yayına alırız. Yayından sonraki 30 gün içinde çıkan hataları ücretsiz düzeltirim.',
-      en: 'We publish the app from your own store accounts. I fix any bugs that show up in the first 30 days for free.',
+      tr: 'Uygulamayı kendi mağaza hesaplarınızdan, web sitesini kendi alan adınızda yayına alırız. Yayından sonraki 30 gün içinde çıkan hataları ücretsiz düzeltirim.',
+      en: 'We publish apps from your own store accounts and websites on your own domain. I fix any bugs that show up in the first 30 days for free.',
     },
   },
 ];
@@ -579,22 +697,22 @@ export const faq: FaqItem[] = [
   {
     q: { tr: 'Fiyatı nasıl belirliyorsunuz?', en: 'How do you price a project?' },
     a: {
-      tr: 'Kapsamı belli işlerde sabit fiyat veriyorum. İş ilerledikçe şekillenecekse saatlik çalışıyorum. Görüşmeden sonra hangi özelliğin ne kadar tuttuğunu gösteren bir teklif gönderiyorum.',
-      en: 'For well-defined work I give a fixed price. If the work will take shape as we go, I bill hourly. After our call I send a proposal that shows what each feature costs.',
+      tr: 'Paketlerdeki fiyat aralıkları fikir vermek için. Kapsamı belli işlerde sabit fiyat veriyorum; iş ilerledikçe şekillenecekse saatlik çalışıyorum. Görüşmeden sonra hangi özelliğin ne kadar tuttuğunu gösteren yazılı bir teklif gönderiyorum.',
+      en: 'The package ranges are there to give you an idea. For well-defined work I give a fixed price; if the work will take shape as we go, I bill hourly. After our call I send a written proposal that shows what each feature costs.',
     },
   },
   {
     q: { tr: 'Ödeme nasıl yapılıyor?', en: 'How does payment work?' },
     a: {
-      tr: 'Genelde %30 başta, %40 çalışan bir test sürümü teslim edildiğinde, kalan %30 da uygulama mağazaya çıktıktan sonra. Büyük projelerde bunu daha fazla parçaya bölebiliriz.',
-      en: 'Usually 30% upfront, 40% when you get a working test build, and the last 30% after the app is in the stores. For bigger projects we can split it into more parts.',
+      tr: 'Genelde %30 başta, %40 çalışan bir test sürümü teslim edildiğinde, kalan %30 da proje yayına çıktıktan sonra. Büyük projelerde bunu daha fazla parçaya bölebiliriz.',
+      en: 'Usually 30% upfront, 40% when you get a working test version, and the last 30% after the project goes live. For bigger projects we can split it into more parts.',
     },
   },
   {
     q: { tr: 'Benim hazırlamam gereken bir şey var mı?', en: 'Do I need to prepare anything?' },
     a: {
-      tr: 'Bir Apple Developer hesabı (yıllık 99 USD) ve bir Google Play geliştirici hesabı (tek seferlik 25 USD) gerekiyor; açarken yardımcı olurum. Bunun dışında logonuz, uygulamadaki metinler ve varsa tasarımlarınız yeterli.',
-      en: 'You need an Apple Developer account ($99 a year) and a Google Play developer account ($25 one-time), and I can help you set them up. Other than that, your logo, the app texts and any designs you have are enough.',
+      tr: 'Uygulama ve oyunlar için bir Apple Developer hesabı (yıllık 99 USD) ve bir Google Play geliştirici hesabı (tek seferlik 25 USD) gerekiyor; açarken yardımcı olurum. Web sitesi için yalnızca bir alan adı gerekiyor. Bunun dışında logonuz, metinleriniz ve varsa tasarımlarınız yeterli.',
+      en: 'For apps and games you need an Apple Developer account ($99 a year) and a Google Play developer account ($25 one-time), and I can help you set them up. For a website, you only need a domain name. Other than that, your logo, your texts and any designs you have are enough.',
     },
   },
   {
@@ -605,10 +723,17 @@ export const faq: FaqItem[] = [
     },
   },
   {
-    q: { tr: 'Bir uygulama ne kadar sürede tamamlanıyor?', en: 'How long does an app take?' },
+    q: { tr: 'Bir proje ne kadar sürede tamamlanıyor?', en: 'How long does a project take?' },
     a: {
-      tr: 'İlk sürüm genelde 4 ile 10 hafta arası sürüyor. Özellik sayısı, içerik miktarı ve tasarımın hazır olup olmaması süreyi en çok etkileyen şeyler.',
-      en: 'A first version usually takes 4 to 10 weeks. The number of features, the amount of content and whether the designs are ready affect it the most.',
+      tr: 'Pakete göre değişiyor: tanıtım sitesi 1–2 hafta, mobil uygulama ve oyunların ilk sürümü genelde 4–16 hafta sürüyor. Özellik sayısı, içerik miktarı ve tasarımın hazır olup olmaması süreyi en çok etkileyen şeyler.',
+      en: 'It depends on the package: a landing site takes 1–2 weeks, and the first version of an app or game usually takes 4–16 weeks. The number of features, the amount of content and whether the designs are ready affect it the most.',
+    },
+  },
+  {
+    q: { tr: 'Tasarım ve grafikler fiyata dahil mi?', en: 'Are design and graphics included in the price?' },
+    a: {
+      tr: 'Hayır, fiyatlar yazılım geliştirme içindir. Arayüz tasarımınız, çizimleriniz ve sesleriniz hazırsa onlarla çalışırım. Hazır değilse lisanslı hazır içeriklerle ilerleyebiliriz ya da tasarım için ayrı bir teklif veririm.',
+      en: 'No, the prices cover development. If your UI design, artwork and sounds are ready, I work with them. If not, we can use licensed ready-made assets, or I can give you a separate quote for the design.',
     },
   },
   {
