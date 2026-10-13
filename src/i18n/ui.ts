@@ -72,8 +72,6 @@ export const ui = {
     'services.cta': 'Teklif iste',
     'services.note': 'Fiyatlara grafik, ses ve arayüz tasarımı dahil değildir; hazır tasarımınızla ya da lisanslı hazır içeriklerle çalışırım. App Store ve Google Play hesap ücretleri size aittir.',
     'services.extras': 'Ek hizmetler',
-    'services.popular': 'En çok tercih edilen',
-
     'wizard.title': 'Paketlere uymayan bir fikriniz mi var?',
     'wizard.subtitle': 'Birkaç soruyu yanıtlayın, projenize özel bir teklif hazırlayayım. Yaklaşık 1 dakika sürer.',
     'wizard.start': 'Teklif sihirbazını başlat',
@@ -181,8 +179,6 @@ export const ui = {
     'services.cta': 'Request a quote',
     'services.note': 'Prices do not include graphics, sound or UI design; I work with your existing designs or licensed ready-made assets. App Store and Google Play account fees are paid by you.',
     'services.extras': 'Additional services',
-    'services.popular': 'Most popular',
-
     'wizard.title': 'Have an idea that does not fit a package?',
     'wizard.subtitle': 'Answer a few questions and I will prepare a quote tailored to your project. It takes about a minute.',
     'wizard.start': 'Start the quote wizard',

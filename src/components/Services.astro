@@ -54,22 +54,8 @@ const t = useTranslations(lang);
 
             <div class="mt-6 grid gap-6 lg:grid-cols-3">
               {category.tiers.map((tier) => (
-                <div
-                  class:list={[
-                    'card flex flex-col',
-                    tier.popular
-                      ? 'border-brand-500 ring-1 ring-brand-500 dark:border-brand-500'
-                      : 'hover:border-brand-300 dark:hover:border-brand-700',
-                  ]}
-                >
-                  <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <h4 class="text-lg font-bold text-slate-900 dark:text-white">{pick(tier.name, lang)}</h4>
-                    {tier.popular && (
-                      <span class="rounded-full bg-brand-600 px-2.5 py-0.5 text-xs font-semibold text-white">
-                        {t('services.popular')}
-                      </span>
-                    )}
-                  </div>
+                <div class="card flex flex-col hover:border-brand-300 dark:hover:border-brand-700">
+                  <h4 class="text-lg font-bold text-slate-900 dark:text-white">{pick(tier.name, lang)}</h4>
                   <p class="mt-1.5 text-sm text-slate-500 dark:text-slate-400">{pick(tier.audience, lang)}</p>
                   <ul class="mt-5 mb-6 flex-1 space-y-2">
                     {pick(tier.features, lang).map((f) => (
@@ -89,7 +75,7 @@ const t = useTranslations(lang);
                     <a
                       href="#contact"
                       data-service={`${pick(category.title, lang)} – ${pick(tier.name, lang)}`}
-                      class:list={[tier.popular ? 'btn-primary border border-transparent' : 'btn-secondary', 'mt-4 w-full']}
+                      class="btn-secondary mt-4 w-full"
                     >
                       {t('services.cta')}
                       <Icon name="arrowRight" class="h-4 w-4" />

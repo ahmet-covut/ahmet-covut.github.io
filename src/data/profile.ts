@@ -56,8 +56,6 @@ export interface PricingTier {
   name: L;
   /** Paketin kimin için olduğunu anlatan tek satır */
   audience: L;
-  /** "En çok tercih edilen" rozetiyle öne çıkarılır */
-  popular?: boolean;
   price: L;
   duration: L;
   features: L<string[]>;
@@ -513,8 +511,8 @@ export const serviceCategories: ServiceCategory[] = [
     icon: 'smartphone',
     title: { tr: 'Mobil Uygulama', en: 'Mobile Apps' },
     description: {
-      tr: 'Projeye göre Unity, Flutter ya da React Native ile tek kod tabanından iOS, Android ve ChromeOS uygulamaları; mağaza yayını dahil.',
-      en: 'iOS, Android and ChromeOS apps from a single codebase with Unity, Flutter or React Native, depending on the project. Store release included.',
+      tr: 'Projeye göre Unity, Flutter ya da React Native ile tek kod tabanından iOS, Android, Windows ve macOS uygulamaları; mağaza yayını dahil.',
+      en: 'iOS, Android, Windows and macOS apps from a single codebase with Unity, Flutter or React Native, depending on the project. Store release included.',
     },
     tiers: [
       {
@@ -529,7 +527,6 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Orta', en: 'Standard' },
-        popular: true,
         audience: { tr: 'Üyelik ve gelir modeli olan uygulamalar için', en: 'For apps with user accounts and a revenue model' },
         price: { tr: '120.000 TL\'den başlayan', en: 'From $5,500' },
         duration: { tr: '6–10 hafta', en: '6–10 weeks' },
@@ -544,8 +541,8 @@ export const serviceCategories: ServiceCategory[] = [
         price: { tr: '220.000 TL\'den başlayan', en: 'From $10,000' },
         duration: { tr: '10–16 hafta', en: '10–16 weeks' },
         features: {
-          tr: ['Orta paketteki her şey', 'ChromeOS desteği', 'Okul ve kurum girişi (SSO)', 'Ebeveyn veya yönetim paneli', 'Çevrimdışı içerik', 'Çocuk uygulamalarında COPPA uyumu'],
-          en: ['Everything in Standard', 'ChromeOS support', 'School and organization sign-in (SSO)', 'Parent or admin dashboard', 'Offline content', 'COPPA compliance for kids\' apps'],
+          tr: ['Orta paketteki her şey', 'Windows ve macOS desteği', 'Okul ve kurum girişi (SSO)', 'Ebeveyn veya yönetim paneli', 'Çevrimdışı içerik', 'Çocuk uygulamalarında COPPA uyumu'],
+          en: ['Everything in Standard', 'Windows and macOS support', 'School and organization sign-in (SSO)', 'Parent or admin dashboard', 'Offline content', 'COPPA compliance for kids\' apps'],
         },
       },
     ],
@@ -571,7 +568,6 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Kurumsal site', en: 'Business site' },
-        popular: true,
         audience: { tr: 'Düzenli içerik paylaşan şirketler ve markalar için', en: 'For companies and brands that publish content regularly' },
         price: { tr: '25.000 TL\'den başlayan', en: 'From $1,400' },
         duration: { tr: '2–5 hafta', en: '2–5 weeks' },
@@ -613,7 +609,6 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Eğitici / çocuk oyunu', en: 'Educational / kids\' game' },
-        popular: true,
         audience: { tr: 'Çocuklara yönelik eğitim içeriği üretenler için', en: 'For creators of educational content for children' },
         price: { tr: '90.000 TL\'den başlayan', en: 'From $4,500' },
         duration: { tr: '6–12 hafta', en: '6–12 weeks' },
@@ -706,8 +701,8 @@ export const quoteWizard: QuoteQuestion[][] = [
       summary: { tr: 'Platformlar', en: 'Platforms' },
       multiple: true,
       options: {
-        tr: ['iOS', 'Android', 'ChromeOS', 'Web', 'Henüz bilmiyorum'],
-        en: ['iOS', 'Android', 'ChromeOS', 'Web', 'Not sure yet'],
+        tr: ['iOS', 'Android', 'Windows', 'macOS', 'Web', 'Henüz bilmiyorum'],
+        en: ['iOS', 'Android', 'Windows', 'macOS', 'Web', 'Not sure yet'],
       },
     },
   ],
