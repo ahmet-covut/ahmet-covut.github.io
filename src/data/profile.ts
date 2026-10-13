@@ -498,8 +498,8 @@ export const serviceCategories: ServiceCategory[] = [
     icon: 'smartphone',
     title: { tr: 'Mobil Uygulama', en: 'Mobile Apps' },
     description: {
-      tr: 'Unity ile tek kod tabanından iOS, Android ve ChromeOS uygulamaları; mağaza yayını dahil.',
-      en: 'iOS, Android and ChromeOS apps from a single Unity codebase, store release included.',
+      tr: 'Projeye göre Unity, Flutter ya da React Native ile tek kod tabanından iOS, Android ve ChromeOS uygulamaları; mağaza yayını dahil.',
+      en: 'iOS, Android and ChromeOS apps from a single codebase with Unity, Flutter or React Native, depending on the project. Store release included.',
     },
     tiers: [
       {
