@@ -1,0 +1,110 @@
+---
+import Icon from './Icon.astro';
+import SectionHeader from './SectionHeader.astro';
+import { experience, type Lang } from '../data/profile';
+import { pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const VISIBLE_HIGHLIGHTS = 6;
+
+const typeMeta = {
+  work: { icon: 'briefcase', label: t('experience.work'), color: 'bg-brand-600' },
+  education: { icon: 'graduation', label: t('experience.education'), color: 'bg-violet-600' },
+  certificate: { icon: 'award', label: t('experience.certificate'), color: 'bg-amber-500' },
+} as const;
+---
+
+<section id="experience" class="bg-slate-50 dark:bg-slate-900/40">
+  <div class="section">
+    <SectionHeader title={t('experience.title')} />
+    <ol class="relative ml-5 border-l-2 border-slate-200 dark:border-slate-800">
+      {
+        experience.map((item, index) => {
+          const meta = typeMeta[item.type];
+          const highlights = item.highlights ? pick(item.highlights, lang) : [];
+          const extra = highlights.slice(VISIBLE_HIGHLIGHTS);
+          return (
+            <li class="reveal relative mb-10 ml-10 last:mb-0">
+              <span
+                class={`absolute top-0 -left-[61px] grid h-10 w-10 place-items-center rounded-full text-white ring-8 ring-slate-50 dark:ring-slate-950 ${meta.color}`}
+              >
+                <Icon name={meta.icon} class="h-5 w-5" />
+              </span>
+              <div class="card">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="badge">{meta.label}</span>
+                  <span class="text-sm font-medium text-slate-500 dark:text-slate-400">{pick(item.period, lang)}</span>
+                </div>
+                <h3 class="mt-3 text-lg font-bold text-slate-900 dark:text-white">{pick(item.title, lang)}</h3>
+                <p class="font-medium text-brand-600 dark:text-brand-400">{pick(item.org, lang)}</p>
+                <p class="mt-3 leading-relaxed text-slate-600 dark:text-slate-300">{pick(item.description, lang)}</p>
+                {highlights.length > 0 && (
+                  <ul class="mt-4 space-y-2">
+                    {highlights.slice(0, VISIBLE_HIGHLIGHTS).map((h) => (
+                      <li class="flex gap-2.5 text-slate-600 dark:text-slate-300">
+                        <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-emerald-500" />
+                        <span class="leading-relaxed">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {extra.length > 0 && (
+                  <>
+                    <ul id={`more-${index}`} class="mt-2 space-y-2" hidden>
+                      {extra.map((h) => (
+                        <li class="flex gap-2.5 text-slate-600 dark:text-slate-300">
+                          <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-emerald-500" />
+                          <span class="leading-relaxed">{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      type="button"
+                      class="group mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400"
+                      aria-expanded="false"
+                      aria-controls={`more-${index}`}
+                      data-more-toggle
+                      data-label-more={`${t('experience.showMore')} (+${extra.length})`}
+                      data-label-less={t('experience.showLess')}
+                    >
+                      <span data-label>{`${t('experience.showMore')} (+${extra.length})`}</span>
+                      <Icon name="chevronDown" class="h-4 w-4 transition group-aria-expanded:rotate-180" />
+                    </button>
+                  </>
+                )}
+                {item.tech && (
+                  <ul class="mt-4 flex flex-wrap gap-1.5">
+                    {item.tech.map((tech) => (
+                      <li class="rounded-md border border-slate-200 px-2 py-0.5 font-mono text-xs text-slate-600 dark:border-slate-700 dark:text-slate-400">
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-more-toggle]').forEach((button) => {
+    const list = document.getElementById(button.getAttribute('aria-controls') ?? '');
+    const label = button.querySelector('[data-label]');
+    if (!list || !label) return;
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(expanded));
+      list.hidden = !expanded;
+      label.textContent = (expanded ? button.dataset.labelLess : button.dataset.labelMore) ?? '';
+    });
+  });
+</script>

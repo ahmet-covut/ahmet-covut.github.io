@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { personal, type Lang } from '../data/profile';
+import { asset, localePath, pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Dil öneki olmadan sayfa yolu (ör. "" veya "projects/fittrack") */
+  path?: string;
+  title?: string;
+  description?: string;
+}
+
+const { lang, path = '', title, description } = Astro.props;
+const t = useTranslations(lang);
+
+const fullTitle = title
+  ? `${title} | ${personal.name}`
+  : `${personal.name} | ${pick(personal.title, lang)}`;
+const metaDescription = description ?? `${pick(personal.tagline, lang)} ${t('meta.description')}`;
+
+const site = Astro.site ?? new URL('http://localhost');
+const canonical = new URL(localePath(lang, path), site).href;
+const alternates = (['tr', 'en'] as Lang[]).map((l) => ({
+  lang: l,
+  href: new URL(localePath(l, path), site).href,
+}));
+const ogImage = new URL(asset('/og-image.png'), site).href;
+
+const sameAs = Object.values(personal.socials).filter(Boolean);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: personal.name,
+  jobTitle: pick(personal.title, lang),
+  email: `mailto:${personal.email}`,
+  url: canonical,
+  ...(personal.avatar && { image: new URL(asset(personal.avatar), site).href }),
+  sameAs,
+  address: { '@type': 'PostalAddress', addressLocality: pick(personal.location, lang) },
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="author" content={personal.name} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates[0].href} />
+    <link rel="icon" type="image/svg+xml" href={asset('/favicon.svg')} />
+    <meta name="theme-color" content="#1f5aeb" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'tr' ? 'tr_TR' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white"
+    >
+      {t('a11y.skip')}
+    </a>
+    <Header lang={lang} path={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.12 },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

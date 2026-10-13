@@ -1,0 +1,46 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { skills, type Lang } from '../data/profile';
+import { localize, pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const core = skills.filter((group) => !group.learning);
+const learning = skills.filter((group) => group.learning);
+---
+
+<section id="skills" class="section">
+  <SectionHeader title={t('skills.title')} subtitle={t('skills.subtitle')} />
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      core.map((group) => (
+        <div class="card reveal hover:border-brand-300 dark:hover:border-brand-700">
+          <h3 class="font-semibold text-slate-900 dark:text-white">{pick(group.title, lang)}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <li class="badge">{localize(item, lang)}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+  {
+    learning.map((group) => (
+      <div class="reveal mt-5 flex flex-col gap-4 rounded-2xl border border-dashed border-brand-300 bg-brand-50/50 p-6 sm:flex-row sm:items-center dark:border-brand-500/40 dark:bg-brand-500/5">
+        <h3 class="shrink-0 font-semibold text-brand-700 dark:text-brand-300">{pick(group.title, lang)}</h3>
+        <ul class="flex flex-wrap gap-2">
+          {group.items.map((item) => (
+            <li class="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-brand-200 dark:bg-slate-900 dark:text-brand-300 dark:ring-brand-500/30">
+              {localize(item, lang)}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</section>

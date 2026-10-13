@@ -1,0 +1,31 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { workProcess, type Lang } from '../data/profile';
+import { pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="process" class="bg-slate-50 dark:bg-slate-900/40">
+  <div class="section">
+    <SectionHeader title={t('process.title')} />
+    <ol class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        workProcess.map((step, i) => (
+          <li class="reveal border-t-2 border-slate-200 pt-4 dark:border-slate-700">
+            <h3 class="font-bold text-slate-900 dark:text-white">
+              <span class="mr-1.5 text-brand-600 dark:text-brand-400">{i + 1}.</span>
+              {pick(step.title, lang)}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{pick(step.description, lang)}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

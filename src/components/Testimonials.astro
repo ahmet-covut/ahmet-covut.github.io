@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import SectionHeader from './SectionHeader.astro';
+import { testimonials, type Lang } from '../data/profile';
+import { pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+{
+  testimonials.length > 0 && (
+    <section id="testimonials" class="bg-slate-50 dark:bg-slate-900/40">
+      <div class="section">
+        <SectionHeader title={t('testimonials.title')} subtitle={t('testimonials.subtitle')} />
+        <div class="grid gap-6 md:grid-cols-3">
+          {testimonials.map((item) => (
+            <figure class="card reveal flex flex-col">
+              <Icon name="quote" class="h-8 w-8 text-brand-200 dark:text-brand-500/40" />
+              <blockquote class="mt-4 flex-1 leading-relaxed text-slate-700 dark:text-slate-300">
+                “{pick(item.quote, lang)}”
+              </blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <span class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-violet-500 text-sm font-bold text-white">
+                  {item.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')}
+                </span>
+                <span>
+                  <span class="block font-semibold text-slate-900 dark:text-white">{item.name}</span>
+                  <span class="block text-sm text-slate-500 dark:text-slate-400">{pick(item.role, lang)}</span>
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

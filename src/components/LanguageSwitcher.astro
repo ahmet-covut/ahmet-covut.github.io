@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import type { Lang } from '../data/profile';
+import { localePath, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = useTranslations(lang);
+const other: Lang = lang === 'tr' ? 'en' : 'tr';
+---
+
+<a
+  href={localePath(other, path)}
+  hreflang={other}
+  lang={other}
+  class="inline-flex h-10 items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+  aria-label={t('lang.switch')}
+  title={t('lang.switch')}
+>
+  <Icon name="globe" class="h-4 w-4" />
+  {other.toUpperCase()}
+</a>

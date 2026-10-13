@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from './Icon.astro';
+import Services from './Services.astro';
+import Process from './Process.astro';
+import FAQ from './FAQ.astro';
+import Testimonials from './Testimonials.astro';
+import Contact from './Contact.astro';
+import { projects, type Lang } from '../data/profile';
+import { asset, localePath, localize, pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} path="freelance" title={t('freelance.title')} description={t('freelance.intro')}>
+  <section class="mx-auto max-w-6xl px-5 pt-16 pb-12 sm:px-8 lg:pt-24">
+    <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+      {t('freelance.title')}
+    </h1>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">{t('freelance.intro')}</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#contact" class="btn-primary">
+        {t('services.cta')}
+        <Icon name="arrowRight" />
+      </a>
+      <a href="#proof" class="btn-secondary">{t('freelance.proof')}</a>
+    </div>
+  </section>
+
+  <Services lang={lang} />
+  <Process lang={lang} />
+
+  <section id="proof" class="section">
+    <h2 class="section-title">{t('freelance.proof')}</h2>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        projects.map((project) => (
+          <li>
+            <a
+              href={localePath(lang, `projects/${project.slug}`)}
+              class="card group flex h-full items-center gap-4 hover:border-brand-300 dark:hover:border-brand-700"
+            >
+              {project.icon && (
+                <img
+                  src={asset(project.icon)}
+                  alt=""
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                  class="h-12 w-12 shrink-0 rounded-xl ring-1 ring-slate-900/5"
+                />
+              )}
+              <span class="min-w-0">
+                <span class="block font-semibold text-slate-900 group-hover:text-brand-600 dark:text-white dark:group-hover:text-brand-400">
+                  {project.name}
+                </span>
+                {project.metrics[0] && (
+                  <span class="block text-sm text-slate-500 dark:text-slate-400">
+                    {localize(project.metrics[0].value, lang)} {pick(project.metrics[0].label, lang).toLocaleLowerCase(lang)}
+                  </span>
+                )}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <FAQ lang={lang} />
+  <Testimonials lang={lang} />
+  <Contact lang={lang} defaultType="freelance" />
+</BaseLayout>

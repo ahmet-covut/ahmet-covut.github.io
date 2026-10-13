@@ -1,0 +1,193 @@
+---
+import Icon from './Icon.astro';
+import SectionHeader from './SectionHeader.astro';
+import SocialLinks from './SocialLinks.astro';
+import { personal, type Lang } from '../data/profile';
+import { pick, useTranslations, type UiKey } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Konu alanında önce seçili gelecek seçenek; bütçe alanı yalnızca 'freelance'ta gösterilir */
+  defaultType?: 'job' | 'freelance';
+}
+
+const { lang, defaultType = 'job' } = Astro.props;
+const isFreelance = defaultType === 'freelance';
+const typeOptions = (isFreelance
+  ? ['contact.type.freelance', 'contact.type.job', 'contact.type.other']
+  : ['contact.type.job', 'contact.type.freelance', 'contact.type.other']) as UiKey[];
+const t = useTranslations(lang);
+
+const formAction = personal.formspreeId ? `https://formspree.io/f/${personal.formspreeId}` : '';
+const inputClass =
+  'mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-white';
+const labelClass = 'text-sm font-medium text-slate-700 dark:text-slate-300';
+---
+
+<section id="contact" class="section">
+  <SectionHeader title={t('contact.title')} subtitle={t('contact.subtitle')} />
+  <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.4fr]">
+    <div class="reveal space-y-4">
+      <a
+        href={`mailto:${personal.email}`}
+        class="card flex items-center gap-4 hover:border-brand-300 dark:hover:border-brand-700"
+      >
+        <span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+          <Icon name="mail" class="h-6 w-6" />
+        </span>
+        <span>
+          <span class="block text-sm text-slate-500 dark:text-slate-400">{t('contact.emailMe')}</span>
+          <span class="block font-semibold break-all text-slate-900 dark:text-white">{personal.email}</span>
+        </span>
+      </a>
+      {
+        personal.calendarUrl && (
+          <a
+            href={personal.calendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card flex items-center gap-4 hover:border-brand-300 dark:hover:border-brand-700"
+          >
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+              <Icon name="calendar" class="h-6 w-6" />
+            </span>
+            <span class="font-semibold text-slate-900 dark:text-white">{t('contact.book')}</span>
+          </a>
+        )
+      }
+      <div class="card flex items-center gap-4">
+        <span class="grid h-12 w-12 place-items-center rounded-xl bg-violet-50 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
+          <Icon name="mapPin" class="h-6 w-6" />
+        </span>
+        <span>
+          <span class="block text-sm text-slate-500 dark:text-slate-400">{t('contact.location')}</span>
+          <span class="block font-semibold text-slate-900 dark:text-white">{pick(personal.location, lang)}</span>
+        </span>
+      </div>
+      <div class="pt-2">
+        <p class="text-sm text-slate-500 dark:text-slate-400">{t('contact.or')}</p>
+        <SocialLinks class="-ml-2 mt-2" />
+      </div>
+    </div>
+
+    <form
+      id="contact-form"
+      class="card reveal space-y-5 !p-6 sm:!p-8"
+      action={formAction || undefined}
+      method="POST"
+      data-email={personal.email}
+      data-sending={t('contact.sending')}
+      data-success={t('contact.success')}
+      data-error={t('contact.error')}
+      data-budget-label={t('contact.budgetShort')}
+    >
+      {
+        formAction && (
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="block">
+              <span class={labelClass}>{t('contact.name')}</span>
+              <input type="text" name="name" required autocomplete="name" class={inputClass} />
+            </label>
+            <label class="block">
+              <span class={labelClass}>{t('contact.email')}</span>
+              <input type="email" name="email" required autocomplete="email" class={inputClass} />
+            </label>
+          </div>
+        )
+      }
+      <div class:list={['grid gap-5', isFreelance && 'sm:grid-cols-2']}>
+        <label class="block">
+          <span class={labelClass}>{t('contact.type')}</span>
+          <select name="subject" class={inputClass}>
+            {typeOptions.map((key) => <option value={t(key)}>{t(key)}</option>)}
+          </select>
+        </label>
+        {
+          isFreelance && (
+            <label class="block">
+              <span class={labelClass}>{t('contact.budget')}</span>
+              <input type="text" name="budget" class={inputClass} />
+            </label>
+          )
+        }
+      </div>
+      <label class="block">
+        <span class={labelClass}>{t('contact.message')}</span>
+        <textarea
+          name="message"
+          rows="5"
+          required
+          placeholder={t('contact.messagePlaceholder')}
+          class={inputClass}></textarea>
+      </label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+      <button type="submit" class="btn-primary w-full sm:w-auto">
+        {t('contact.send')}
+        <Icon name="arrowRight" />
+      </button>
+      <p data-status class="hidden rounded-xl p-4 text-sm font-medium" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const buttonHtml = button.innerHTML;
+
+    const showStatus = (message: string, ok: boolean) => {
+      status.textContent = message;
+      status.className = `rounded-xl p-4 text-sm font-medium ${
+        ok
+          ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400'
+          : 'bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400'
+      }`;
+    };
+
+    // "Teklif iste" butonları formu ilgili hizmetle önceden doldurur
+    document.querySelectorAll<HTMLAnchorElement>('[data-service]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const select = form.elements.namedItem('subject') as HTMLSelectElement;
+        const message = form.elements.namedItem('message') as HTMLTextAreaElement;
+        select.selectedIndex = 0;
+        if (!message.value) message.value = `${link.dataset.service}: `;
+      });
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      if (data.get('_gotcha')) return;
+
+      // Formspree kimliği yoksa e-posta uygulaması açılır; gönderen bilgisi zaten maildedir
+      if (!form.getAttribute('action')) {
+        const subject = String(data.get('subject'));
+        const budget = data.get('budget');
+        const body = budget ? `${data.get('message')}\n\n${form.dataset.budgetLabel}: ${budget}` : String(data.get('message'));
+        window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = form.dataset.sending ?? '...';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        form.reset();
+        showStatus(form.dataset.success ?? '', true);
+      } catch {
+        showStatus(form.dataset.error ?? '', false);
+      } finally {
+        button.disabled = false;
+        button.innerHTML = buttonHtml;
+      }
+    });
+  }
+</script>

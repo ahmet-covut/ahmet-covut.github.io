@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { localePath } from '../i18n/ui';
+---
+
+<BaseLayout lang="tr" title="404">
+  <section class="section flex min-h-[60vh] flex-col items-center justify-center text-center">
+    <p class="text-7xl font-extrabold text-brand-600 dark:text-brand-400">404</p>
+    <h1 class="mt-4 text-2xl font-bold text-slate-900 dark:text-white">Sayfa bulunamadı · Page not found</h1>
+    <div class="mt-8 flex gap-3">
+      <a href={localePath('tr')} class="btn-primary">Ana sayfa</a>
+      <a href={localePath('en')} class="btn-secondary">Home</a>
+    </div>
+  </section>
+</BaseLayout>

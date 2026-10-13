@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Skills from './Skills.astro';
+import Projects from './Projects.astro';
+import Timeline from './Timeline.astro';
+import Testimonials from './Testimonials.astro';
+import Contact from './Contact.astro';
+import type { Lang } from '../data/profile';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang}>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Skills lang={lang} />
+  <Projects lang={lang} />
+  <Timeline lang={lang} />
+  <Testimonials lang={lang} />
+  <Contact lang={lang} defaultType="job" />
+</BaseLayout>

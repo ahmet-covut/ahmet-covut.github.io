@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import { personal } from '../data/profile';
+import { getLangFromUrl } from '../i18n/ui';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+const items = [
+  { href: personal.socials.github, icon: 'github', label: 'GitHub' },
+  { href: personal.socials.linkedin, icon: 'linkedin', label: 'LinkedIn' },
+  { href: personal.socials.twitter, icon: 'twitter', label: 'X / Twitter' },
+  { href: personal.socials.medium, icon: 'medium', label: 'Medium' },
+  { href: `mailto:${personal.email}`, icon: 'mail', label: lang === 'tr' ? 'E-posta' : 'Email' },
+] as const;
+---
+
+<ul class={`flex items-center gap-2 ${className}`}>
+  {
+    items
+      .filter((item) => item.href && item.href !== 'mailto:')
+      .map((item) => (
+        <li>
+          <a
+            href={item.href}
+            target={item.href.startsWith('http') ? '_blank' : undefined}
+            rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="grid h-10 w-10 place-items-center rounded-full text-slate-500 transition hover:bg-slate-100 hover:text-brand-600 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-brand-400"
+            aria-label={item.label}
+            title={item.label}
+          >
+            <Icon name={item.icon} class="h-5 w-5" />
+          </a>
+        </li>
+      ))
+  }
+</ul>
