@@ -795,49 +795,49 @@ export const faq: FaqItem[] = [
   {
     q: { tr: 'Fiyatı nasıl belirliyorsunuz?', en: 'How do you price a project?' },
     a: {
-      tr: 'Paketlerdeki fiyatlar başlangıç fiyatlarıdır. Kapsamı belli işlerde sabit fiyat veriyorum; iş ilerledikçe şekillenecekse saatlik çalışıyorum. Görüşmeden sonra hangi özelliğin ne kadar tuttuğunu gösteren yazılı bir teklif gönderiyorum.',
+      tr: 'Paketlerde belirtilen tutarlar başlangıç fiyatlarıdır. Kapsamı net olan işlerde sabit fiyat, süreç içinde şekillenecek işlerde ise saatlik ücretlendirme uygulanır. Ön görüşmenin ardından her özelliğin maliyetini gösteren yazılı bir teklif iletilir.',
       en: 'The package prices are starting prices. For well-defined work I give a fixed price; if the work will take shape as we go, I bill hourly. After our call I send a written proposal that shows what each feature costs.',
     },
   },
   {
     q: { tr: 'Ödeme nasıl yapılıyor?', en: 'How does payment work?' },
     a: {
-      tr: 'Genelde %30 başta, %40 çalışan bir test sürümü teslim edildiğinde, kalan %30 da proje yayına çıktıktan sonra. Büyük projelerde bunu daha fazla parçaya bölebiliriz.',
+      tr: 'Ödemeler genellikle üç aşamada alınır: %30 proje başlangıcında, %40 çalışan test sürümünün tesliminde, kalan %30 ise proje yayına alındıktan sonra. Büyük ölçekli projelerde ödeme planı daha fazla aşamaya bölünebilir.',
       en: 'Usually 30% upfront, 40% when you get a working test version, and the last 30% after the project goes live. For bigger projects we can split it into more parts.',
     },
   },
   {
     q: { tr: 'Benim hazırlamam gereken bir şey var mı?', en: 'Do I need to prepare anything?' },
     a: {
-      tr: 'Uygulama ve oyunlar için bir Apple Developer hesabı (yıllık 99 USD) ve bir Google Play geliştirici hesabı (tek seferlik 25 USD) gerekiyor; açarken yardımcı olurum. Web sitesi için yalnızca bir alan adı gerekiyor. Bunun dışında logonuz, metinleriniz ve varsa tasarımlarınız yeterli.',
+      tr: 'Uygulama ve oyun projeleri için bir Apple Developer hesabı (yıllık 99 USD) ve bir Google Play geliştirici hesabı (tek seferlik 25 USD) gereklidir; hesapların açılması sürecinde destek sağlanır. Web sitesi projeleri için yalnızca bir alan adı yeterlidir. Bunların dışında logo, metinler ve varsa mevcut tasarımlar talep edilir.',
       en: 'For apps and games you need an Apple Developer account ($99 a year) and a Google Play developer account ($25 one-time), and I can help you set them up. For a website, you only need a domain name. Other than that, your logo, your texts and any designs you have are enough.',
     },
   },
   {
     q: { tr: 'Daha önce çocuk uygulaması geliştirdiniz mi?', en: 'Have you built apps for kids before?' },
     a: {
-      tr: 'Evet. Mayadem\'de üzerinde çalıştığım uygulamaların hepsi çocuklara yönelikti; TRT Çocuk serisi de bunlardan. COPPA ve mağazaların çocuk uygulamaları için koyduğu kurallar konusunda deneyimliyim.',
+      tr: 'Evet. Mayadem bünyesinde üzerinde çalışılan uygulamaların tamamı çocuklara yönelikti; TRT Çocuk serisi de bu uygulamalar arasında yer almaktadır. COPPA ve uygulama mağazalarının çocuk uygulamalarına ilişkin kuralları konusunda kapsamlı deneyim bulunmaktadır.',
       en: 'Yes. Every app I worked on at Mayadem was made for children, including the TRT Kids series. I know COPPA and the rules the stores set for children\'s apps.',
     },
   },
   {
     q: { tr: 'Bir proje ne kadar sürede tamamlanıyor?', en: 'How long does a project take?' },
     a: {
-      tr: 'Pakete göre değişiyor: tanıtım sitesi 1–2 hafta, mobil uygulama ve oyunların ilk sürümü genelde 4–16 hafta sürüyor. Özellik sayısı, içerik miktarı ve tasarımın hazır olup olmaması süreyi en çok etkileyen şeyler.',
+      tr: 'Süre, seçilen pakete göre değişir: tanıtım siteleri 1–2 haftada, mobil uygulama ve oyunların ilk sürümü ise genellikle 4–16 haftada tamamlanır. Süreyi en çok etkileyen etkenler özellik sayısı, içerik miktarı ve tasarımların hazır olup olmamasıdır.',
       en: 'It depends on the package: a landing site takes 1–2 weeks, and the first version of an app or game usually takes 4–16 weeks. The number of features, the amount of content and whether the designs are ready affect it the most.',
     },
   },
   {
     q: { tr: 'Tasarım ve grafikler fiyata dahil mi?', en: 'Are design and graphics included in the price?' },
     a: {
-      tr: 'Hayır, fiyatlar yazılım geliştirme içindir. Arayüz tasarımınız, çizimleriniz ve sesleriniz hazırsa onlarla çalışırım. Hazır değilse lisanslı hazır içeriklerle ilerleyebiliriz.',
+      tr: 'Hayır, fiyatlar yalnızca yazılım geliştirme hizmetini kapsar. Arayüz tasarımı, çizimler ve sesler hazırsa bunlar kullanılır; hazır değilse lisanslı hazır içeriklerle ilerlenebilir.',
       en: 'No, the prices cover development. If your UI design, artwork and sounds are ready, I work with them. If not, we can use licensed ready-made assets.',
     },
   },
   {
     q: { tr: 'Kaynak kodun sahibi kim oluyor?', en: 'Who owns the source code?' },
     a: {
-      tr: 'Ödeme tamamlandığında kod ve tüm hakları sizin oluyor. Kodu kendi Git deponuza teslim ediyorum. İsterseniz işe başlamadan önce sözleşme ve gizlilik anlaşması (NDA) da imzalarız.',
+      tr: 'Ödemenin tamamlanmasıyla birlikte kaynak kod ve tüm hakları size devredilir. Kod, size ait Git deposuna teslim edilir. Talep edilmesi hâlinde işe başlamadan önce sözleşme ve gizlilik anlaşması (NDA) imzalanabilir.',
       en: 'Once payment is complete, the code and all rights are yours. I deliver it to your own Git repository. If you like, we can also sign a contract and an NDA before we start.',
     },
   },
