@@ -732,8 +732,8 @@ export const faq: FaqItem[] = [
   {
     q: { tr: 'Tasarım ve grafikler fiyata dahil mi?', en: 'Are design and graphics included in the price?' },
     a: {
-      tr: 'Hayır, fiyatlar yazılım geliştirme içindir. Arayüz tasarımınız, çizimleriniz ve sesleriniz hazırsa onlarla çalışırım. Hazır değilse lisanslı hazır içeriklerle ilerleyebiliriz ya da tasarım için ayrı bir teklif veririm.',
-      en: 'No, the prices cover development. If your UI design, artwork and sounds are ready, I work with them. If not, we can use licensed ready-made assets, or I can give you a separate quote for the design.',
+      tr: 'Hayır, fiyatlar yazılım geliştirme içindir. Arayüz tasarımınız, çizimleriniz ve sesleriniz hazırsa onlarla çalışırım. Hazır değilse lisanslı hazır içeriklerle ilerleyebiliriz.',
+      en: 'No, the prices cover development. If your UI design, artwork and sounds are ready, I work with them. If not, we can use licensed ready-made assets.',
     },
   },
   {

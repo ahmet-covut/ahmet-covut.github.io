@@ -70,7 +70,7 @@ export const ui = {
     'services.tabs': 'Hizmet türü',
     'services.duration': 'Süre',
     'services.cta': 'Teklif iste',
-    'services.note': 'Fiyatlara grafik, ses ve arayüz tasarımı dahil değildir; hazır tasarımınızla çalışırım ya da tasarım için ayrı teklif veririm. App Store ve Google Play hesap ücretleri size aittir.',
+    'services.note': 'Fiyatlara grafik, ses ve arayüz tasarımı dahil değildir; hazır tasarımınızla ya da lisanslı hazır içeriklerle çalışırım. App Store ve Google Play hesap ücretleri size aittir.',
     'services.extras': 'Ek hizmetler',
 
     'process.title': 'Nasıl çalışıyoruz?',
@@ -165,7 +165,7 @@ export const ui = {
     'services.tabs': 'Service type',
     'services.duration': 'Duration',
     'services.cta': 'Request a quote',
-    'services.note': 'Prices do not include graphics, sound or UI design; I can work with your existing designs or quote the design separately. App Store and Google Play account fees are paid by you.',
+    'services.note': 'Prices do not include graphics, sound or UI design; I work with your existing designs or licensed ready-made assets. App Store and Google Play account fees are paid by you.',
     'services.extras': 'Additional services',
 
     'process.title': 'How we work together',
