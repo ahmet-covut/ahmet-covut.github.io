@@ -98,9 +98,15 @@ const labelClass = 'text-sm font-medium text-slate-700 dark:text-slate-300';
       <div class:list={['grid gap-5', isFreelance && 'sm:grid-cols-2']}>
         <label class="block">
           <span class={labelClass}>{t('contact.type')}</span>
-          <select name="subject" class={inputClass}>
-            {typeOptions.map((key) => <option value={t(key)}>{t(key)}</option>)}
-          </select>
+          <span class="relative block">
+            <select name="subject" class:list={[inputClass, 'cursor-pointer appearance-none pr-11']}>
+              {typeOptions.map((key) => <option value={t(key)}>{t(key)}</option>)}
+            </select>
+            <Icon
+              name="chevronDown"
+              class="pointer-events-none absolute top-1/2 right-4 mt-0.75 h-4 w-4 -translate-y-1/2 text-slate-500 dark:text-slate-400"
+            />
+          </span>
         </label>
         {
           isFreelance && (
