@@ -29,8 +29,8 @@ export const ui = {
 
     'about.title': 'Hakkımda',
     'about.languages': 'Diller',
-    'about.freelanceNote': 'Freelance bir proje için mi geldiniz?',
-    'about.freelanceLink': 'Freelance sayfama göz atın',
+    'about.freelanceNote': 'Freelance olarak da çalışıyorum.',
+    'about.freelanceLink': 'Ayrıntılar için freelance sayfasına bakabilirsiniz',
 
     'skills.title': 'Teknolojiler',
     'skills.subtitle': 'Profesyonel olarak kullandığım ve şu sıralar öğrendiğim teknolojiler.',
@@ -50,7 +50,7 @@ export const ui = {
     'case.tech': 'Kullanılan teknolojiler',
     'case.platforms': 'Platformlar',
     'case.year': 'Mağazaya çıkışı',
-    'case.cta': 'Benzer bir uygulama mı düşünüyorsunuz?',
+    'case.cta': 'Bu proje hakkında konuşmak ister misiniz?',
     'case.ctaButton': 'Benimle iletişime geçin',
     'case.next': 'Sonraki proje',
 
@@ -94,6 +94,8 @@ export const ui = {
 
     'contact.title': 'İletişim',
     'contact.subtitle': 'Bir iş teklifiniz ya da proje fikriniz varsa yazabilirsiniz; en kısa sürede dönüş yaparım.',
+    'contact.subtitleGeneral': 'Bir proje, iş birliği ya da sadece merhaba demek için yazabilirsiniz.',
+    'contact.defaultSubject': 'Web sitesi üzerinden mesaj',
     'contact.name': 'Adınız',
     'contact.email': 'E-posta adresiniz',
     'contact.type': 'Konu',
@@ -104,6 +106,7 @@ export const ui = {
     'contact.budgetShort': 'Bütçe',
     'contact.message': 'Mesajınız',
     'contact.messagePlaceholder': 'Projenizden veya pozisyondan kısaca bahsedin...',
+    'contact.messagePlaceholderGeneral': 'Mesajınızı yazın...',
     'contact.send': 'Gönder',
     'contact.sending': 'Gönderiliyor...',
     'contact.success': 'Teşekkürler! Mesajınız iletildi, en kısa sürede dönüş yapacağım.',
@@ -136,8 +139,8 @@ export const ui = {
 
     'about.title': 'About me',
     'about.languages': 'Languages',
-    'about.freelanceNote': 'Here for a freelance project?',
-    'about.freelanceLink': 'See my freelance page',
+    'about.freelanceNote': 'I also take on freelance work.',
+    'about.freelanceLink': 'See the freelance page for details',
 
     'skills.title': 'Skills',
     'skills.subtitle': 'Technologies I have used professionally and those I am currently learning.',
@@ -157,7 +160,7 @@ export const ui = {
     'case.tech': 'Tech stack',
     'case.platforms': 'Platforms',
     'case.year': 'Released',
-    'case.cta': 'Thinking about a similar app?',
+    'case.cta': 'Want to talk about this project?',
     'case.ctaButton': 'Get in touch',
     'case.next': 'Next project',
 
@@ -201,6 +204,8 @@ export const ui = {
 
     'contact.title': 'Contact',
     'contact.subtitle': 'If you have a job offer or a project idea, send me a message and I will get back to you soon.',
+    'contact.subtitleGeneral': 'Feel free to reach out about a project, a collaboration or just to say hello.',
+    'contact.defaultSubject': 'Message from your website',
     'contact.name': 'Your name',
     'contact.email': 'Your email',
     'contact.type': 'Subject',
@@ -211,6 +216,7 @@ export const ui = {
     'contact.budgetShort': 'Budget',
     'contact.message': 'Your message',
     'contact.messagePlaceholder': 'Tell me briefly about your project or the role...',
+    'contact.messagePlaceholderGeneral': 'Write your message...',
     'contact.send': 'Send',
     'contact.sending': 'Sending...',
     'contact.success': 'Thank you! Your message has been sent. I will get back to you soon.',

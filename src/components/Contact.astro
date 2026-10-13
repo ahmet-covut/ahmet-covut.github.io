@@ -7,15 +7,13 @@ import { pick, useTranslations, type UiKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
-  /** Konu alanında önce seçili gelecek seçenek; bütçe alanı yalnızca 'freelance'ta gösterilir */
-  defaultType?: 'job' | 'freelance';
+  /** 'freelance' konu seçicisini ve bütçe alanını gösterir; 'general' sade bir mesaj formudur */
+  variant?: 'general' | 'freelance';
 }
 
-const { lang, defaultType = 'job' } = Astro.props;
-const isFreelance = defaultType === 'freelance';
-const typeOptions = (isFreelance
-  ? ['contact.type.freelance', 'contact.type.job', 'contact.type.other']
-  : ['contact.type.job', 'contact.type.freelance', 'contact.type.other']) as UiKey[];
+const { lang, variant = 'general' } = Astro.props;
+const isFreelance = variant === 'freelance';
+const typeOptions = ['contact.type.freelance', 'contact.type.job', 'contact.type.other'] as UiKey[];
 const t = useTranslations(lang);
 
 const formAction = personal.formspreeId ? `https://formspree.io/f/${personal.formspreeId}` : '';
@@ -25,7 +23,7 @@ const labelClass = 'text-sm font-medium text-slate-700 dark:text-slate-300';
 ---
 
 <section id="contact" class="section">
-  <SectionHeader title={t('contact.title')} subtitle={t('contact.subtitle')} />
+  <SectionHeader title={t('contact.title')} subtitle={t(isFreelance ? 'contact.subtitle' : 'contact.subtitleGeneral')} />
   <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.4fr]">
     <div class="reveal space-y-4">
       <a
@@ -95,35 +93,37 @@ const labelClass = 'text-sm font-medium text-slate-700 dark:text-slate-300';
           </div>
         )
       }
-      <div class:list={['grid gap-5', isFreelance && 'sm:grid-cols-2']}>
-        <label class="block">
-          <span class={labelClass}>{t('contact.type')}</span>
-          <span class="relative block">
-            <select name="subject" class:list={[inputClass, 'cursor-pointer appearance-none pr-11']}>
-              {typeOptions.map((key) => <option value={t(key)}>{t(key)}</option>)}
-            </select>
-            <Icon
-              name="chevronDown"
-              class="pointer-events-none absolute top-1/2 right-4 mt-0.75 h-4 w-4 -translate-y-1/2 text-slate-500 dark:text-slate-400"
-            />
-          </span>
-        </label>
-        {
-          isFreelance && (
+      {
+        isFreelance ? (
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="block">
+              <span class={labelClass}>{t('contact.type')}</span>
+              <span class="relative block">
+                <select name="subject" class:list={[inputClass, 'cursor-pointer appearance-none pr-11']}>
+                  {typeOptions.map((key) => <option value={t(key)}>{t(key)}</option>)}
+                </select>
+                <Icon
+                  name="chevronDown"
+                  class="pointer-events-none absolute top-1/2 right-4 mt-0.75 h-4 w-4 -translate-y-1/2 text-slate-500 dark:text-slate-400"
+                />
+              </span>
+            </label>
             <label class="block">
               <span class={labelClass}>{t('contact.budget')}</span>
               <input type="text" name="budget" class={inputClass} />
             </label>
-          )
-        }
-      </div>
+          </div>
+        ) : (
+          <input type="hidden" name="subject" value={t('contact.defaultSubject')} />
+        )
+      }
       <label class="block">
         <span class={labelClass}>{t('contact.message')}</span>
         <textarea
           name="message"
           rows="5"
           required
-          placeholder={t('contact.messagePlaceholder')}
+          placeholder={t(isFreelance ? 'contact.messagePlaceholder' : 'contact.messagePlaceholderGeneral')}
           class={inputClass}></textarea>
       </label>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
@@ -156,9 +156,9 @@ const labelClass = 'text-sm font-medium text-slate-700 dark:text-slate-300';
     // "Teklif iste" butonları formu ilgili hizmetle önceden doldurur
     document.querySelectorAll<HTMLAnchorElement>('[data-service]').forEach((link) => {
       link.addEventListener('click', () => {
-        const select = form.elements.namedItem('subject') as HTMLSelectElement;
+        const subject = form.elements.namedItem('subject');
         const message = form.elements.namedItem('message') as HTMLTextAreaElement;
-        select.selectedIndex = 0;
+        if (subject instanceof HTMLSelectElement) subject.selectedIndex = 0;
         if (!message.value) message.value = `${link.dataset.service}: `;
       });
     });

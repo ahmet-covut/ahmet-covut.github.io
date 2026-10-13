@@ -156,12 +156,12 @@ export const about = {
     tr: [
       'Yazılım geliştiricisiyim. İstanbul Şehir Üniversitesi Bilgisayar Mühendisliği mezunuyum; 2019–2025 yılları arasında Mayadem\'de ağırlıklı olarak C# ve Unity ile iOS, Android ve ChromeOS için milyonlarca kullanıcıya ulaşan uygulamalar geliştirdim.',
       'Bir ürünün geliştirmeden yayına ve yayından sonrasına kadar her aşamasında sorumluluk almayı seviyorum. REST API ve üçüncü taraf servis entegrasyonları, sürüm yönetimi, hata ve çökme analizi ile performans optimizasyonu en çok deneyim kazandığım alanlar. Hassas kullanıcı kitlelerine yönelik ürünlerde çalışmak, gizliliği ve platform kurallarına (COPPA gibi) uyumu işin en başından düşünmeyi alışkanlık haline getirdi.',
-      'Agile/Scrum ile çalışan, farklı disiplinlerden oluşan ekiplerde yer aldım ve stajyer geliştiricilere mentorluk yaptım. Yeni teknolojiler öğrenmekten keyif alıyorum; şu sıralar Swift, Flutter, React Native ve yapay zekâ entegrasyonları üzerine çalışıyorum. İyi mühendislik pratiklerine önem veren bir ekipte tam zamanlı bir yazılım geliştirici pozisyonu arıyorum.',
+      'Agile/Scrum ile çalışan, farklı disiplinlerden oluşan ekiplerde yer aldım ve stajyer geliştiricilere mentorluk yaptım. Yeni teknolojiler öğrenmekten keyif alıyorum; şu sıralar Swift, Flutter, React Native ve yapay zekâ entegrasyonları üzerine çalışıyorum. Temiz ve sürdürülebilir kod yazmaya, kullanıcıya gerçekten değer katan ürünler geliştirmeye önem veriyorum.',
     ],
     en: [
       'I am a software developer with a degree in Computer Engineering from Istanbul Şehir University. From 2019 to 2025 I worked at Mayadem, mainly building apps with C# and Unity for iOS, Android and ChromeOS that reached millions of users.',
       'I like taking ownership of a product at every stage, from development to release and beyond. REST API and third-party service integrations, release management, bug and crash analysis, and performance optimization are the areas where I have the most experience. Working on products for a sensitive audience made it a habit to think about privacy and platform compliance (such as COPPA) from the very start.',
-      'I have worked in cross-functional Agile/Scrum teams and mentored intern developers. I enjoy learning new technologies and am currently working with Swift, Flutter, React Native and AI integrations. I am looking for a full-time software developer role on a team that values good engineering practices.',
+      'I have worked in cross-functional Agile/Scrum teams and mentored intern developers. I enjoy learning new technologies and am currently working with Swift, Flutter, React Native and AI integrations. I care about writing clean, maintainable code and building products that bring real value to their users.',
     ],
   } as L<string[]>,
   highlights: [
