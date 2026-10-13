@@ -1,0 +1,195 @@
+---
+import Icon from './Icon.astro';
+import { quoteWizard, type Lang } from '../data/profile';
+import { pick, useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const lastStep = quoteWizard.length - 1;
+---
+
+<section id="custom-quote" class="section !pt-0" data-wizard-root hidden>
+  <div class="card !p-6 sm:!p-8">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">{t('wizard.title')}</h2>
+        <p class="mt-2 max-w-xl text-slate-600 dark:text-slate-300">{t('wizard.subtitle')}</p>
+      </div>
+      <button type="button" class="btn-primary shrink-0" data-wizard-start>
+        {t('wizard.start')}
+        <Icon name="arrowRight" />
+      </button>
+    </div>
+
+    <form
+      class="mt-8"
+      hidden
+      data-wizard
+      data-summary-title={t('wizard.summary')}
+      data-details-label={t('wizard.detailsShort')}
+    >
+      <p class="text-sm font-medium text-slate-500 dark:text-slate-400">
+        {t('wizard.step')} <span data-current>1</span> / {quoteWizard.length}
+      </p>
+      <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+        <div data-bar class="h-full rounded-full bg-brand-600 transition-all" style={`width: ${100 / quoteWizard.length}%`}>
+        </div>
+      </div>
+
+      {
+        quoteWizard.map((step, i) => (
+          <div data-step tabindex="-1" class="mt-6 space-y-6 focus:outline-none" hidden={i !== 0}>
+            {step.map((question) => (
+              <fieldset
+                data-question={question.id}
+                data-summary={pick(question.summary, lang)}
+                data-required={question.required ? '' : undefined}
+              >
+                <legend class="font-semibold text-slate-900 dark:text-white">
+                  {pick(question.label, lang)}
+                  {question.multiple && (
+                    <span class="ml-1 text-sm font-normal text-slate-500 dark:text-slate-400">({t('wizard.multiple')})</span>
+                  )}
+                </legend>
+                <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {pick(question.options, lang).map((option) => (
+                    <label class="relative cursor-pointer">
+                      <input
+                        type={question.multiple ? 'checkbox' : 'radio'}
+                        name={question.id}
+                        value={option}
+                        class="peer sr-only"
+                      />
+                      <span class="block rounded-xl border border-slate-300 bg-white py-3 pr-10 pl-4 text-sm font-medium text-slate-700 transition hover:border-brand-400 peer-checked:border-brand-500 peer-checked:bg-brand-50 peer-checked:text-brand-700 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:peer-checked:bg-brand-500/10 dark:peer-checked:text-brand-300">
+                        {option}
+                      </span>
+                      <Icon
+                        name="check"
+                        class="pointer-events-none absolute top-1/2 right-3 hidden h-4 w-4 -translate-y-1/2 text-brand-600 peer-checked:block dark:text-brand-400"
+                      />
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+            {i === lastStep && (
+              <label class="block">
+                <span class="font-semibold text-slate-900 dark:text-white">{t('wizard.details')}</span>
+                <textarea
+                  name="details"
+                  rows="3"
+                  class="mt-3 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                />
+              </label>
+            )}
+          </div>
+        ))
+      }
+
+      <div class="mt-8 flex items-center justify-between gap-3">
+        <button type="button" class="btn-secondary disabled:pointer-events-none disabled:opacity-40" data-back>
+          <Icon name="arrowLeft" class="h-4 w-4" />
+          {t('wizard.back')}
+        </button>
+        <button type="button" class="btn-primary disabled:pointer-events-none disabled:opacity-50" data-next>
+          {t('wizard.next')}
+          <Icon name="arrowRight" class="h-4 w-4" />
+        </button>
+        <button type="submit" class="btn-primary disabled:pointer-events-none disabled:opacity-50" data-finish hidden>
+          {t('wizard.finish')}
+          <Icon name="arrowRight" class="h-4 w-4" />
+        </button>
+      </div>
+      <p
+        data-done
+        hidden
+        role="status"
+        class="mt-4 rounded-xl bg-emerald-50 p-4 text-sm font-medium text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
+      >
+        {t('wizard.done')}
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+  // JavaScript kapalıysa bölüm gizli kalır; paketler ve iletişim formu yine çalışır
+  const root = document.querySelector<HTMLElement>('[data-wizard-root]');
+  const contact = document.querySelector<HTMLFormElement>('#contact-form');
+
+  if (root && contact) {
+    root.hidden = false;
+    const form = root.querySelector<HTMLFormElement>('[data-wizard]')!;
+    const start = root.querySelector<HTMLButtonElement>('[data-wizard-start]')!;
+    const steps = [...form.querySelectorAll<HTMLElement>('[data-step]')];
+    const back = form.querySelector<HTMLButtonElement>('[data-back]')!;
+    const next = form.querySelector<HTMLButtonElement>('[data-next]')!;
+    const finish = form.querySelector<HTMLButtonElement>('[data-finish]')!;
+    const current = form.querySelector<HTMLElement>('[data-current]')!;
+    const bar = form.querySelector<HTMLElement>('[data-bar]')!;
+    const done = form.querySelector<HTMLElement>('[data-done]')!;
+    let index = 0;
+
+    const update = () => {
+      const complete = [...steps[index].querySelectorAll('fieldset[data-required]')].every((fieldset) =>
+        fieldset.querySelector('input:checked'),
+      );
+      next.disabled = !complete;
+      finish.disabled = !complete;
+    };
+
+    const show = (i: number) => {
+      index = i;
+      steps.forEach((step, j) => (step.hidden = j !== i));
+      current.textContent = String(i + 1);
+      bar.style.width = `${((i + 1) / steps.length) * 100}%`;
+      back.disabled = i === 0;
+      next.hidden = i === steps.length - 1;
+      finish.hidden = i !== steps.length - 1;
+      done.hidden = true;
+      update();
+      steps[i].focus({ preventScroll: true });
+    };
+
+    start.addEventListener('click', () => {
+      start.hidden = true;
+      form.hidden = false;
+      show(0);
+    });
+    form.addEventListener('change', update);
+    back.addEventListener('click', () => show(index - 1));
+    next.addEventListener('click', () => show(index + 1));
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const budgetInput = contact.elements.namedItem('budget') as HTMLInputElement | null;
+      const lines: string[] = [];
+
+      form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-question]').forEach((fieldset) => {
+        const values = data.getAll(fieldset.dataset.question!).map(String);
+        if (!values.length) return;
+        if (fieldset.dataset.question === 'budget' && budgetInput) {
+          budgetInput.value = values.join(', ');
+          return;
+        }
+        lines.push(`- ${fieldset.dataset.summary}: ${values.join(', ')}`);
+      });
+
+      const details = String(data.get('details') ?? '').trim();
+      if (details) lines.push(`- ${form.dataset.detailsLabel}: ${details}`);
+
+      (contact.elements.namedItem('subject') as HTMLSelectElement).selectedIndex = 0;
+      const message = contact.elements.namedItem('message') as HTMLTextAreaElement;
+      message.value = `${form.dataset.summaryTitle}\n\n${lines.join('\n')}`;
+
+      done.hidden = false;
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      message.focus({ preventScroll: true });
+    });
+  }
+</script>

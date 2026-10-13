@@ -54,6 +54,10 @@ export interface ExperienceItem {
 
 export interface PricingTier {
   name: L;
+  /** Paketin kimin için olduğunu anlatan tek satır */
+  audience: L;
+  /** "En çok tercih edilen" rozetiyle öne çıkarılır */
+  popular?: boolean;
   price: L;
   duration: L;
   features: L<string[]>;
@@ -74,6 +78,17 @@ export interface Service {
   priceFrom: L;
   duration: L;
   features: L<string[]>;
+}
+
+export interface QuoteQuestion {
+  /** Form alanının adı; 'budget' iletişim formundaki bütçe alanına aktarılır */
+  id: string;
+  label: L;
+  /** Özette kullanılan kısa başlık */
+  summary: L;
+  multiple?: boolean;
+  required?: boolean;
+  options: L<string[]>;
 }
 
 export interface ProcessStep {
@@ -504,7 +519,8 @@ export const serviceCategories: ServiceCategory[] = [
     tiers: [
       {
         name: { tr: 'Basit', en: 'Basic' },
-        price: { tr: '60.000 – 120.000 TL', en: '$3,000 – $5,500' },
+        audience: { tr: 'Fikrini hızlıca mağazaya çıkarmak isteyenler için', en: 'For getting your idea into the stores quickly' },
+        price: { tr: '60.000 TL\'den başlayan', en: 'From $3,000' },
         duration: { tr: '4–6 hafta', en: '4–6 weeks' },
         features: {
           tr: ['5–8 ekran', 'Metin, görsel ve video içerik', 'Analitik ve çökme takibi', 'App Store ve Google Play yayını'],
@@ -513,7 +529,9 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Orta', en: 'Standard' },
-        price: { tr: '120.000 – 220.000 TL', en: '$5,500 – $10,000' },
+        popular: true,
+        audience: { tr: 'Üyelik ve gelir modeli olan uygulamalar için', en: 'For apps with user accounts and a revenue model' },
+        price: { tr: '120.000 TL\'den başlayan', en: 'From $5,500' },
         duration: { tr: '6–10 hafta', en: '6–10 weeks' },
         features: {
           tr: ['Basit paketteki her şey', 'Üyelik ve Google / Apple ile giriş', 'REST API bağlantısı', 'Bildirimler', 'Abonelik ve uygulama içi satın alma'],
@@ -522,7 +540,8 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Kapsamlı', en: 'Advanced' },
-        price: { tr: '220.000 – 450.000 TL', en: '$10,000 – $20,000' },
+        audience: { tr: 'Okullar, kurumlar ve geniş kullanıcı kitleleri için', en: 'For schools, organizations and large user bases' },
+        price: { tr: '220.000 TL\'den başlayan', en: 'From $10,000' },
         duration: { tr: '10–16 hafta', en: '10–16 weeks' },
         features: {
           tr: ['Orta paketteki her şey', 'ChromeOS desteği', 'Okul ve kurum girişi (SSO)', 'Ebeveyn veya yönetim paneli', 'Çevrimdışı içerik', 'Çocuk uygulamalarında COPPA uyumu'],
@@ -542,7 +561,8 @@ export const serviceCategories: ServiceCategory[] = [
     tiers: [
       {
         name: { tr: 'Tanıtım sitesi', en: 'Landing site' },
-        price: { tr: '12.000 – 25.000 TL', en: '$600 – $1,400' },
+        audience: { tr: 'İşini internette tanıtmak isteyen küçük işletmeler için', en: 'For small businesses that want to be found online' },
+        price: { tr: '12.000 TL\'den başlayan', en: 'From $600' },
         duration: { tr: '1–2 hafta', en: '1–2 weeks' },
         features: {
           tr: ['1–5 sayfa', 'Türkçe ve İngilizce', 'İletişim formu', 'Temel SEO', 'Ücretsiz barındırma kurulumu'],
@@ -551,7 +571,9 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Kurumsal site', en: 'Business site' },
-        price: { tr: '25.000 – 60.000 TL', en: '$1,400 – $3,000' },
+        popular: true,
+        audience: { tr: 'Düzenli içerik paylaşan şirketler ve markalar için', en: 'For companies and brands that publish content regularly' },
+        price: { tr: '25.000 TL\'den başlayan', en: 'From $1,400' },
         duration: { tr: '2–5 hafta', en: '2–5 weeks' },
         features: {
           tr: ['10+ sayfa', 'Blog veya içerik yönetimi', 'Çoklu dil desteği', 'Analitik'],
@@ -560,7 +582,8 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Web uygulaması', en: 'Web app' },
-        price: { tr: '70.000 – 180.000 TL', en: '$3,500 – $9,000' },
+        audience: { tr: 'Kullanıcıların giriş yapıp işlem yaptığı projeler için', en: 'For projects where users sign in and get things done' },
+        price: { tr: '70.000 TL\'den başlayan', en: 'From $3,500' },
         duration: { tr: '5–12 hafta', en: '5–12 weeks' },
         features: {
           tr: ['Üyelik ve giriş', 'Kullanıcı paneli', 'Veritabanı (Supabase)', 'Dosya yükleme'],
@@ -580,7 +603,8 @@ export const serviceCategories: ServiceCategory[] = [
     tiers: [
       {
         name: { tr: 'Mini oyun', en: 'Casual game' },
-        price: { tr: '40.000 – 90.000 TL', en: '$2,000 – $4,000' },
+        audience: { tr: 'Basit ve eğlenceli bir oyunla başlamak isteyenler için', en: 'For starting with a simple, fun game' },
+        price: { tr: '40.000 TL\'den başlayan', en: 'From $2,000' },
         duration: { tr: '3–6 hafta', en: '3–6 weeks' },
         features: {
           tr: ['Tek oyun mekaniği', '10–20 seviye', 'Analitik', 'Mağaza yayını'],
@@ -589,7 +613,9 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Eğitici / çocuk oyunu', en: 'Educational / kids\' game' },
-        price: { tr: '90.000 – 220.000 TL', en: '$4,500 – $10,000' },
+        popular: true,
+        audience: { tr: 'Çocuklara yönelik eğitim içeriği üretenler için', en: 'For creators of educational content for children' },
+        price: { tr: '90.000 TL\'den başlayan', en: 'From $4,500' },
         duration: { tr: '6–12 hafta', en: '6–12 weeks' },
         features: {
           tr: ['Birden fazla mini oyun', 'İlerleme kaydı', 'Ses ve animasyon entegrasyonu', 'COPPA uyumu'],
@@ -598,7 +624,8 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: { tr: 'Kapsamlı oyun', en: 'Full game' },
-        price: { tr: '220.000 – 450.000 TL', en: '$10,000 – $22,000' },
+        audience: { tr: 'Uzun soluklu ve gelir getiren oyunlar için', en: 'For long-term games that generate revenue' },
+        price: { tr: '220.000 TL\'den başlayan', en: 'From $10,000' },
         duration: { tr: '3–6 ay', en: '3–6 months' },
         features: {
           tr: ['Çok sayıda seviye', 'Abonelik ve uygulama içi satın alma', 'Ebeveyn paneli', 'Yeni içerik eklenebilen yapı'],
@@ -655,6 +682,82 @@ export const extraServices: Service[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// ÖZEL TEKLİF SİHİRBAZI
+// Her iç dizi bir adımdır; son adıma ayrıca açıklama kutusu eklenir.
+// ---------------------------------------------------------------------------
+
+export const quoteWizard: QuoteQuestion[][] = [
+  [
+    {
+      id: 'type',
+      label: { tr: 'Ne yaptırmak istiyorsunuz?', en: 'What would you like to build?' },
+      summary: { tr: 'Proje türü', en: 'Project type' },
+      required: true,
+      options: {
+        tr: ['Mobil uygulama', 'Web sitesi', 'Oyun', 'Mevcut uygulamama ekleme', 'Diğer'],
+        en: ['Mobile app', 'Website', 'Game', 'Adding to my existing app', 'Other'],
+      },
+    },
+  ],
+  [
+    {
+      id: 'platforms',
+      label: { tr: 'Hangi platformlarda olmalı?', en: 'Which platforms do you need?' },
+      summary: { tr: 'Platformlar', en: 'Platforms' },
+      multiple: true,
+      options: {
+        tr: ['iOS', 'Android', 'ChromeOS', 'Web', 'Henüz bilmiyorum'],
+        en: ['iOS', 'Android', 'ChromeOS', 'Web', 'Not sure yet'],
+      },
+    },
+  ],
+  [
+    {
+      id: 'features',
+      label: { tr: 'Hangi özellikler gerekiyor?', en: 'Which features do you need?' },
+      summary: { tr: 'Özellikler', en: 'Features' },
+      multiple: true,
+      options: {
+        tr: ['Üyelik ve giriş', 'Abonelik veya ödeme', 'Bildirimler', 'Yönetim paneli', 'Çoklu dil', 'Çevrimdışı içerik', 'API veya entegrasyon'],
+        en: ['Accounts and sign-in', 'Subscriptions or payments', 'Push notifications', 'Admin dashboard', 'Multiple languages', 'Offline content', 'API or integrations'],
+      },
+    },
+  ],
+  [
+    {
+      id: 'design',
+      label: { tr: 'Tasarımınız hazır mı?', en: 'Is your design ready?' },
+      summary: { tr: 'Tasarım', en: 'Design' },
+      required: true,
+      options: {
+        tr: ['Hazır', 'Kısmen hazır', 'Hazır değil'],
+        en: ['Ready', 'Partly ready', 'Not ready'],
+      },
+    },
+  ],
+  [
+    {
+      id: 'timeline',
+      label: { tr: 'Ne zamana yetişmesi gerekiyor?', en: 'When do you need it?' },
+      summary: { tr: 'Zaman', en: 'Timeline' },
+      options: {
+        tr: ['1 ay içinde', '1–3 ay', 'Esnek'],
+        en: ['Within a month', '1–3 months', 'Flexible'],
+      },
+    },
+    {
+      id: 'budget',
+      label: { tr: 'Tahmini bütçeniz nedir?', en: 'What is your estimated budget?' },
+      summary: { tr: 'Bütçe', en: 'Budget' },
+      options: {
+        tr: ['25.000 TL altı', '25.000 – 75.000 TL', '75.000 – 150.000 TL', '150.000 – 300.000 TL', '300.000 TL üzeri', 'Henüz bilmiyorum'],
+        en: ['Under $1,000', '$1,000 – $3,000', '$3,000 – $7,000', '$7,000 – $15,000', 'Over $15,000', 'Not sure yet'],
+      },
+    },
+  ],
+];
+
+// ---------------------------------------------------------------------------
 // ÇALIŞMA SÜRECİ
 // ---------------------------------------------------------------------------
 
@@ -697,8 +800,8 @@ export const faq: FaqItem[] = [
   {
     q: { tr: 'Fiyatı nasıl belirliyorsunuz?', en: 'How do you price a project?' },
     a: {
-      tr: 'Paketlerdeki fiyat aralıkları fikir vermek için. Kapsamı belli işlerde sabit fiyat veriyorum; iş ilerledikçe şekillenecekse saatlik çalışıyorum. Görüşmeden sonra hangi özelliğin ne kadar tuttuğunu gösteren yazılı bir teklif gönderiyorum.',
-      en: 'The package ranges are there to give you an idea. For well-defined work I give a fixed price; if the work will take shape as we go, I bill hourly. After our call I send a written proposal that shows what each feature costs.',
+      tr: 'Paketlerdeki fiyatlar başlangıç fiyatlarıdır. Kapsamı belli işlerde sabit fiyat veriyorum; iş ilerledikçe şekillenecekse saatlik çalışıyorum. Görüşmeden sonra hangi özelliğin ne kadar tuttuğunu gösteren yazılı bir teklif gönderiyorum.',
+      en: 'The package prices are starting prices. For well-defined work I give a fixed price; if the work will take shape as we go, I bill hourly. After our call I send a written proposal that shows what each feature costs.',
     },
   },
   {
