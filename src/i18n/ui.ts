@@ -66,7 +66,7 @@ export const ui = {
     'freelance.proof': 'Üzerinde çalıştığım uygulamalar',
 
     'services.title': 'Neler yapabilirim?',
-    'services.subtitle': 'Belirtilen fiyatlar başlangıç fiyatlarıdır; kesin fiyatı projeyi konuştuktan sonra yazılı olarak paylaşıyorum.',
+    'services.subtitle': 'Belirtilen tutarlar başlangıç teklifleridir; kesin teklifi projeyi konuştuktan sonra yazılı olarak paylaşıyorum.',
     'services.tabs': 'Hizmet türü',
     'services.duration': 'Süre',
     'services.cta': 'Teklif iste',
@@ -176,7 +176,7 @@ export const ui = {
     'freelance.proof': 'Apps I have worked on',
 
     'services.title': 'What I can do for you',
-    'services.subtitle': 'These are starting prices; I send an exact quote in writing once we have discussed the project.',
+    'services.subtitle': 'These are starting quotes; I send a final quote in writing once we have discussed the project.',
     'services.tabs': 'Service type',
     'services.duration': 'Duration',
     'services.cta': 'Request a quote',
